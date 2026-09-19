@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>$(EarliestSupportedTargetFramework)</TargetFramework>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Themes\*.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Themes\*.json" />
+    <Content Include="Themes\*.json" Exclude="Themes\vs2019*.json"
+             CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

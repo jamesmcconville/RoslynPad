@@ -1,23 +1,53 @@
 <Project>
   <PropertyGroup>
-    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
-  </PropertyGroup>
-  <PropertyGroup>
+    <RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
+    <DefaultTargetFramework>net11.0</DefaultTargetFramework>
+    <EarliestSupportedTargetFramework>net10.0</EarliestSupportedTargetFramework>
+    <TargetFramework Condition=" '$(TargetFramework)' == '' and '$(TargetFrameworks)' == '' ">$(DefaultTargetFramework)</TargetFramework>
+    <IsMacOS>$([System.OperatingSystem]::IsMacOS())</IsMacOS>
+    <IsLinux>$([System.OperatingSystem]::IsLinux())</IsLinux>
+    <IsWindows>$([System.OperatingSystem]::IsWindows())</IsWindows>
+    <IsMacBuild Condition=" '$(IsMacOS)' == 'true' and ( '$(RuntimeIdentifier)' == '' or $(RuntimeIdentifier.Contains('osx')) ) ">true</IsMacBuild>
+    <IsWindowsBuild Condition=" ( '$(IsWindows)' == 'true' and '$(RuntimeIdentifier)' == '' ) or $(RuntimeIdentifier.Contains('win')) ">true</IsWindowsBuild>
     <Features>strict</Features>
     <Deterministic>True</Deterministic>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-    <EditorPackageVersion>1.2.0</EditorPackageVersion>
-    <RoslynPackageVersion>3.5.0</RoslynPackageVersion>
-    <AvaloniaVersion>0.9.4</AvaloniaVersion>
-    <!--<EnableAvaloniaXamlCompilation>false</EnableAvaloniaXamlCompilation>-->
-    <RoslynAssemblyVersion>$(RoslynPackageVersion).0</RoslynAssemblyVersion>
-    <LangVersion>8.0</LangVersion>
+    <Version>5.9.0</Version>
+    <RoslynPadVersion>22.2.0</RoslynPadVersion>
+    <ApplicationVersion>$(RoslynPadVersion.Replace('.', ''))</ApplicationVersion>
+    <ApplicationDisplayVersion>$(RoslynPadVersion)</ApplicationDisplayVersion>
+    <LangVersion>latest</LangVersion>
     <Nullable>Enable</Nullable>
-    <Authors>Eli Arbel</Authors>
-    <PackageProjectUrl>https://github.com/aelij/RoslynPad</PackageProjectUrl>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <AnalysisMode>Recommended</AnalysisMode>
+    <IsPackable>false</IsPackable>
+    <Authors>aelij;roslynpad</Authors>
+    <PackageProjectUrl>https://roslynpad.net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/roslynpad/roslynpad</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Roslyn;RoslynPad</PackageTags>
+    <PackageIcon>RoslynPad.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <IncludePackageReferencesDuringMarkupCompilation>true</IncludePackageReferencesDuringMarkupCompilation>
+    <TrimMode>partial</TrimMode>
+    <TrimmerSingleWarn>false</TrimmerSingleWarn>
+    <ImplicitUsings>true</ImplicitUsings>
+    <ValidateXcodeVersion>false</ValidateXcodeVersion>
+    <NoWarn>$(NoWarn);EnableGenerateDocumentationFile</NoWarn>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(GITHUB_ACTIONS)' == 'true' ">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)\docs\RoslynPad.png" Pack="true" PackagePath="\" Visible="false" />
+    <None Include="README.md" Pack="true" PackagePath="\"
+          Condition=" Exists('$(MSBuildProjectDirectory)\README.md') " />
+  </ItemGroup>
 </Project>

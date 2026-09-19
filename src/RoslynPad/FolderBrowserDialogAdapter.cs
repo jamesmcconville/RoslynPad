@@ -1,35 +1,41 @@
-﻿using System.Composition;
-using System.Windows;
-using Avalon.Windows.Dialogs;
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Platform.Storage;
 using RoslynPad.UI;
 
-namespace RoslynPad
+namespace RoslynPad;
+
+[Export(typeof(IFolderBrowserDialog))]
+internal class FolderBrowserDialogAdapter : IFolderBrowserDialog
 {
-    [Export(typeof(IFolderBrowserDialog))]
-    internal class FolderBrowserDialogAdapter : IFolderBrowserDialog
+    public bool ShowEditBox { get; set; }
+
+    public string SelectedPath { get; set; } = string.Empty;
+
+    public async Task<bool?> ShowAsync()
     {
-        private readonly FolderBrowserDialog _dialog;
+        var window = (Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?
+            .Windows.FirstOrDefault(w => w.IsActive);
 
-        public FolderBrowserDialogAdapter()
+        if (window == null)
         {
-            _dialog = new FolderBrowserDialog();
+            return false;
         }
 
-        public bool ShowEditBox
+        var options = new FolderPickerOpenOptions
         {
-            get => _dialog.ShowEditBox;
-            set => _dialog.ShowEditBox = value;
+            AllowMultiple = false,
+            SuggestedStartLocation = await window.StorageProvider.TryGetFolderFromPathAsync(SelectedPath).ConfigureAwait(false),
+        };
+
+        var folders = await window.StorageProvider.OpenFolderPickerAsync(options).ConfigureAwait(false);
+
+        if (folders.Count > 0)
+        {
+            SelectedPath = folders[0].Path.LocalPath;
+            return true;
         }
 
-        public string SelectedPath
-        {
-            get => _dialog.SelectedPath;
-            set => _dialog.SelectedPath = value;
-        }
-
-        public bool? Show()
-        {
-            return _dialog.ShowDialog(Application.Current.MainWindow);
-        }
+        return false;
     }
 }

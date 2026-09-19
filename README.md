@@ -1,55 +1,63 @@
 # RoslynPad
 
-![RoslynPad](src/RoslynPad/Resources/RoslynPad.png)
+<img src="docs/roslynpad.svg" height="100" alt="RoslynPad" />
 
-A cross-platform C# editor based on Roslyn and AvalonEdit
+A cross-platform C# editor powered by Roslyn and the Morgania editor - an Avalonia editor based on the [vs-editor-api](https://github.com/microsoft/vs-editor-api) repo.
 
-[![Downloads](https://img.shields.io/github/downloads/aelij/RoslynPad/total.svg?style=flat-square)](https://github.com/aelij/RoslynPad/releases)
+![RoslynPad](docs/screenshots/roslynpad.webp)
 
-Also available to download in the Microsoft Store:
+## Installing
 
-<a href="https://www.microsoft.com/store/apps/9nctj2cqwxv0?ocid=badge"><img src="https://assets.windowsphone.com/f2f77ec7-9ba9-4850-9ebe-77e366d08adc/English_Get_it_Win_10_InvariantCulture_Default.png" width="200" alt="Get it on Windows 10" /></a>
+**You must also install a supported [.NET SDK](https://aka.ms/dotnet) to allow RoslynPad to compile programs.**
+
+| Source | |
+|-|-|
+| GitHub | [![Downloads](https://img.shields.io/github/downloads/roslynpad/roslynpad/total.svg?style=flat-square)](https://github.com/roslynpad/roslynpad/releases/latest) |
+| Microsoft Store | <a href="https://www.microsoft.com/store/apps/9nctj2cqwxv0?ocid=badge"><img src="https://get.microsoft.com/images/en-us%20light.svg" height="30" alt="Microsoft Store badge logo" /></a> |
+| winget | `winget install --id RoslynPad.RoslynPad` |
+| Homebrew | `brew install --cask roslynpad` |
 
 ## Packages
 
-RoslynPad is also available as NuGet packages which allow you to use Roslyn services and the editor in your own apps.
-
-|Package Name|Description|
-|------------|-----------|
-|[![NuGet](https://img.shields.io/nuget/v/RoslynPad.Roslyn.svg?style=flat-square)](https://www.nuget.org/packages/RoslynPad.Roslyn) `RoslynPad.Roslyn`|Exposes many Roslyn editor services that are currently internal|
-|[![NuGet](https://img.shields.io/nuget/v/RoslynPad.Roslyn.Windows.svg?style=flat-square)](https://www.nuget.org/packages/RoslynPad.Roslyn.Windows) `RoslynPad.Roslyn.Windows`|Provides platform-specific (WPF) implementations for UI elements required by the `RoslynPad.Roslyn` package|
-|[![NuGet](https://img.shields.io/nuget/v/RoslynPad.Roslyn.Avalonia.svg?style=flat-square)](https://www.nuget.org/packages/RoslynPad.Roslyn.Avalonia)` RoslynPad.Roslyn.Avalonia`|Provides platform-specific (Avalonia) implementations for UI elements required by the `RoslynPad.Roslyn` package|
-|[![NuGet](https://img.shields.io/nuget/v/RoslynPad.Editor.Windows.svg?style=flat-square)](https://www.nuget.org/packages/RoslynPad.Editor.Windows) `RoslynPad.Editor.Windows`|Provides a Roslyn-based code editor using AvaloniaEdit (WPF platform) with completion, diagnostics, and quick actions|
-|[![NuGet](https://img.shields.io/nuget/v/RoslynPad.Editor.Avalonia.svg?style=flat-square)](https://www.nuget.org/packages/RoslynPad.Editor.Avalonia) `RoslynPad.Editor.Avalonia`|Provides a Roslyn-based code editor using AvalonEdit (Avalonia platform) with completion, diagnostics, and quick actions|
-
-`RoslynPad.Roslyn*` package versions will correspond to Roslyn's.
-
-[Code samples](https://github.com/aelij/RoslynPad/tree/master/samples)
+See [Packages](docs/packages/README.md) for more information.
 
 ## Building
 
-Open `src\RoslynPad.sln` in Visual Studio 2019.
-
-## Running the cross-platform .NET Core Avalonia version (on Mac or Linux)
-
-* Install .NET Core Runtime 2.2
-* Download and unzip `RoslynPadNetCore.zip`.
-* Run `dotnet RoslynPad.dll`
+To build the source code, use one of the following:
+* `dotnet build`
+* Visual Studio Code with the C# extension
+* Visual Studio 2026 (Windows only)
 
 ## Features
 
 ### Completion
 
-![Completion](docs/Completion.png)
+![Completion](docs/screenshots/completion.webp)
 
 ### Signature Help
 
-![Signature Help](docs/SignatureHelp.png)
+![Signature Help](docs/screenshots/signature-help.webp)
+
+### Quick Info
+
+![Quick Info](docs/screenshots/quick-info.webp)
 
 ### Diagnostics
 
-![Diagnostics](docs/Diagnostics.png)
+![Diagnostics](docs/screenshots/diagnostics.webp)
 
 ### Code Fixes
 
-![Code Fixes](docs/CodeFixes.png)
+![Code Fixes](docs/screenshots/actions.webp)
+
+### NuGet Packages
+
+![NuGet Packages](docs/screenshots/nuget.webp)
+
+### Document Management
+
+![Document Management](docs/screenshots/documents.webp)
+
+### Dump Results
+
+![Dump Results](docs/screenshots/dump.webp)

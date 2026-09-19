@@ -1,52 +1,46 @@
-using System.Composition;
-using System.Threading.Tasks;
-using System.Windows;
-using Microsoft.Win32;
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Platform.Storage;
 using RoslynPad.UI;
 
-namespace RoslynPad
+namespace RoslynPad;
+
+[Export(typeof(IOpenFileDialog))]
+internal class OpenFileDialogAdapter : IOpenFileDialog
 {
-    [Export(typeof(IOpenFileDialog))]
-    internal class OpenFileDialogAdapter : IOpenFileDialog
+    public bool AllowMultiple { get; set; }
+
+    public FileDialogFilter? Filter { get; set; }
+
+    public string InitialDirectory { get; set; } = string.Empty;
+
+    public string FileName { get; set; } = string.Empty;
+
+    public async Task<string[]?> ShowAsync()
     {
-        private readonly OpenFileDialog _dialog;
+        var window = (Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.Windows.FirstOrDefault(w => w.IsActive);
 
-        public OpenFileDialogAdapter()
+        if (window == null)
         {
-            _dialog = new OpenFileDialog();
+            return null;
         }
 
-        public bool AllowMultiple
+        var options = new FilePickerOpenOptions
         {
-            get => _dialog.Multiselect;
-            set => _dialog.Multiselect = value;
+            AllowMultiple = AllowMultiple,
+            SuggestedStartLocation = await window.StorageProvider.TryGetFolderFromPathAsync(InitialDirectory).ConfigureAwait(false),
+        };
+
+        if (Filter != null)
+        {
+            options.FileTypeFilter =
+            [
+                new FilePickerFileType(Filter.Header) { Patterns = Filter.Extensions }
+            ];
         }
 
-        public FileDialogFilter Filter
-        {
-            set => _dialog.Filter = value + string.Empty;
-        }
+        var files = await window.StorageProvider.OpenFilePickerAsync(options).ConfigureAwait(false);
 
-        public string InitialDirectory
-        {
-            get => _dialog.InitialDirectory;
-            set => _dialog.InitialDirectory = value;
-        }
-
-        public string FileName
-        {
-            get => _dialog.FileName;
-            set => _dialog.FileName = value;
-        }
-
-        public Task<string[]?> ShowAsync()
-        {
-            if (_dialog.ShowDialog(Application.Current.MainWindow) == true)
-            {
-                return Task.FromResult<string[]?>(_dialog.FileNames);
-            }
-
-            return Task.FromResult<string[]?>(null);
-        }
+        return [.. files.Select(file => file.Path.ToString())];
     }
 }

@@ -1,0 +1,58 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DotNetExtensionsVersion>11.0.0-rc.1.26425.128</DotNetExtensionsVersion>
+    <RoslynVersion>5.9.0</RoslynVersion>
+    <AvaloniaVersion>12.1.2</AvaloniaVersion>
+    <NuGetVersion>7.9.0</NuGetVersion>
+    <DockAvaloniaVersion>12.1.0.6</DockAvaloniaVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia.Headless" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia.Skia" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="DialogHost.Avalonia" Version="0.12.3" />
+    <PackageVersion Include="Dock.Avalonia.Themes.Fluent" Version="$(DockAvaloniaVersion)" />
+    <PackageVersion Include="Dock.Avalonia" Version="$(DockAvaloniaVersion)" />
+    <PackageVersion Include="Dock.Model.Avalonia" Version="$(DockAvaloniaVersion)" />
+    <PackageVersion Include="ICSharpCode.Decompiler" Version="11.0.0.9375" />
+    <PackageVersion Include="IgnoresAccessChecksToGenerator" Version="1.0.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Features" Version="$(RoslynVersion)" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="$(RoslynVersion)" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="$(RoslynVersion)" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="$(RoslynVersion)" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.Features" Version="$(RoslynVersion)" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="$(RoslynVersion)" />
+    <PackageVersion Include="Microsoft.Build.Framework" Version="18.10.1" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="$(DotNetExtensionsVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="$(DotNetExtensionsVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="$(DotNetExtensionsVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="$(DotNetExtensionsVersion)" />
+    <PackageVersion Include="Microsoft.Identity.Client.Extensions.Msal" Version="4.90.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageVersion Include="Microsoft.VisualStudio.Composition" Version="18.9.78" />
+    <PackageVersion Include="Microsoft.VisualStudio.Threading" Version="18.7.131" />
+    <PackageVersion Include="Microsoft.VisualStudio.Validation" Version="18.7.19" />
+    <PackageVersion Include="Mono.Cecil" Version="0.11.6" />
+    <PackageVersion Include="Nerdbank.Streams" Version="2.14.354" />
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageVersion Include="NuGet.Commands" Version="$(NuGetVersion)" />
+    <PackageVersion Include="NuGet.Versioning" Version="$(NuGetVersion)" />
+    <PackageVersion Include="StreamJsonRpc" Version="2.25.29" />
+    <PackageVersion Include="System.ComponentModel.Composition" Version="$(DotNetExtensionsVersion)" />
+    <PackageVersion Include="System.Composition.AttributedModel" Version="$(DotNetExtensionsVersion)" />
+    <PackageVersion Include="System.Composition" Version="$(DotNetExtensionsVersion)" />
+    <PackageVersion Include="System.Linq.AsyncEnumerable" Version="$(DotNetExtensionsVersion)" />
+    <PackageVersion Include="System.Memory.Data" Version="$(DotNetExtensionsVersion)" />
+    <PackageVersion Include="System.Reactive.Core" Version="6.1.0" />
+    <PackageVersion Include="System.Reactive.Linq" Version="6.1.0" />
+    <PackageVersion Include="System.Reflection.Metadata" Version="$(DotNetExtensionsVersion)" />
+    <PackageVersion Include="System.Reflection.MetadataLoadContext" Version="$(DotNetExtensionsVersion)" />
+    <PackageVersion Include="System.Text.Json" Version="$(DotNetExtensionsVersion)" />
+  </ItemGroup>
+</Project>

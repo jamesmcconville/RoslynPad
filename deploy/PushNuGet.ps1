@@ -1,2 +1,10 @@
-ls -recurse ..\src\*.nupkg | % { nuget push $_.FullName -source nuget.org }
-rm -recurse ..\src\*.nupkg
+$ErrorActionPreference = 'Stop'
+$PSNativeCommandUseErrorActionPreference = $true
+
+Remove-Item -Recurse $PSScriptRoot\..\src\*.nupkg
+
+dotnet pack $PSScriptRoot\..\RoslynPad.slnx -c Release -p:EnableWindowsTargeting=true -p:ContinuousIntegrationBuild=true
+
+$apiKey = Read-Host -Prompt "Enter nuget.org API key"
+Get-ChildItem -Recurse $PSScriptRoot\..\src\*.nupkg | `
+    ForEach-Object { dotnet nuget push $_.FullName --source nuget.org --api-key $apiKey }
